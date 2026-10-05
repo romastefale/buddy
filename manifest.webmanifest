@@ -1,0 +1,20 @@
+{
+"id": "https://romastefale.github.io/buddy/",
+"name": "Guardiões Virtuais",
+"short_name": "Guardiões",
+"description": "Seu guardião virtual para acompanhar seu dia a dia.",
+"start_url": "https://romastefale.github.io/buddy/",
+"scope": "https://romastefale.github.io/buddy/",
+"display": "standalone",
+"orientation": "portrait",
+"background_color": "#FBF8F5",
+"theme_color": "#FBF8F5",
+"icons": [
+{
+"src": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512' fill='%23785335'><rect width='512' height='512' rx='128' fill='%23785335'/><path d='M256 140c-35 0-65 25-65 60 0 25 15 45 35 55-5 15-20 25-40 25-30 0-50 20-50 50 0 45 50 82 120 82s120-37 120-82c0-30-20-50-50-50-20 0-35-10-40-25 20-10 35-30 35-55 0-35-30-60-65-60z' fill='%23FFDCC3'/><circle cx='170' cy='150' r='26' fill='%23FFDCC3'/><circle cx='342' cy='150' r='26' fill='%23FFDCC3'/><circle cx='110' cy='220' r='22' fill='%23FFDCC3'/><circle cx='402' cy='220' r='22' fill='%23FFDCC3'/></svg>",
+"sizes": "512x512",
+"type": "image/svg+xml",
+"purpose": "any maskable"
+}
+]
+}
