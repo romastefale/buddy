@@ -9,8 +9,21 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet" />
-    <meta name="theme-color" id="themeColorMeta" content="#FBF8F5">
     
+    <!-- Meta Theme Color para Chrome / Android com suporte a prefers-color-scheme -->
+    <meta name="theme-color" id="themeColorMeta" content="#FBF8F5">
+    <meta name="theme-color" id="themeColorMetaLight" media="(prefers-color-scheme: light)" content="#FBF8F5">
+    <meta name="theme-color" id="themeColorMetaDark" media="(prefers-color-scheme: dark)" content="#18120E">
+    
+    <!-- Compatibilidade Safari / iOS iPhone -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" id="appleStatusBarMeta" content="default">
+    <meta name="apple-mobile-web-app-title" content="Guardiões">
+    <link rel="apple-touch-icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512' fill='%23785335'><rect width='512' height='512' rx='128' fill='%23785335'/><path d='M256 140c-35 0-65 25-65 60 0 25 15 45 35 55-5 15-20 25-40 25-30 0-50 20-50 50 0 45 50 82 120 82s120-37 120-82c0-30-20-50-50-50-20 0-35-10-40-25 20-10 35-30 35-55 0-35-30-60-65-60z' fill='%23FFDCC3'/><circle cx='170' cy='150' r='26' fill='%23FFDCC3'/><circle cx='342' cy='150' r='26' fill='%23FFDCC3'/><circle cx='110' cy='220' r='22' fill='%23FFDCC3'/><circle cx='402' cy='220' r='22' fill='%23FFDCC3'/></svg>">
+
+    <!-- Web App Manifest embutido (PWA) com identificador único do domínio -->
+    <link rel="manifest" href="data:application/manifest+json;charset=utf-8,%7B%22id%22%3A%22https%3A%2F%2Fromastefale.github.io%2Fbuddy%2F%22%2C%22name%22%3A%22Guardi%C3%B5es%20Virtuais%22%2C%22short_name%22%3A%22Guardi%C3%B5es%22%2C%22start_url%22%3A%22https%3A%2F%2Fromastefale.github.io%2Fbuddy%2F%22%2C%22scope%22%3A%22https%3A%2F%2Fromastefale.github.io%2Fbuddy%2F%22%2C%22display%22%3A%22standalone%22%2C%22orientation%22%3A%22portrait%22%2C%22background_color%22%3A%22%23FBF8F5%22%2C%22theme_color%22%3A%22%23FBF8F5%22%2C%22description%22%3A%22Seu%20guardi%C3%A3o%20virtual%20para%20acompanhar%20seu%20dia%20a%20dia.%22%2C%22icons%22%3A%5B%7B%22src%22%3A%22data%3Aimage%2Fsvg%2Bxml%3Butf8%2C%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%20512%20512'%20fill%3D'%23785335'%3E%3Crect%20width%3D'512'%20height%3D'512'%20rx%3D'128'%20fill%3D'%23785335'%2F%3E%3Cpath%20d%3D'M256%20140c-35%200-65%2025-65%2060%200%2025%2015%2045%2035%2055-5%2015-20%2025-40%2025-30%200-50%2020-50%2050%200%2045%2050%2082%20120%2082s120-37%20120-82c0-30-20-50-50-50-20%200-35-10-40-25%2020-10%2035-30%2035-55%200-35-30-60-65-60z'%20fill%3D'%23FFDCC3'%2F%3E%3Ccircle%20cx%3D'170'%20cy%3D'150'%20r%3D'26'%20fill%3D'%23FFDCC3'%2F%3E%3Ccircle%20cx%3D'342'%20cy%3D'150'%20r%3D'26'%20fill%3D'%23FFDCC3'%2F%3E%3Ccircle%20cx%3D'110'%20cy%3D'220'%20r%3D'22'%20fill%3D'%23FFDCC3'%2F%3E%3Ccircle%20cx%3D'402'%20cy%3D'220'%20r%3D'22'%20fill%3D'%23FFDCC3'%2F%3E%3C%2Fsvg%3E%22%2C%22sizes%22%3A%22512x512%22%2C%22type%22%3A%22image%2Fsvg%2Bxml%22%2C%22purpose%22%3A%22any%20maskable%22%7D%5D%7D">
+
     <style>
         :root {
             /* Palette Material Design 3 - Modo Claro (Off-white & Slate Brown) */
@@ -671,9 +684,24 @@
 
         function updateThemeMeta() {
             const isDark = document.body.dataset.theme === 'dark';
+            const themeColor = isDark ? '#18120E' : '#FBF8F5';
+
+            // Atualiza dynamicamente a barra do Chrome no Android / Desktop
             const metaTag = document.getElementById('themeColorMeta');
             if (metaTag) {
-                metaTag.setAttribute('content', isDark ? '#18120E' : '#FBF8F5');
+                metaTag.setAttribute('content', themeColor);
+            }
+
+            // Atualiza dynamicamente as meta tags de mídia
+            const metaLight = document.getElementById('themeColorMetaLight');
+            const metaDark = document.getElementById('themeColorMetaDark');
+            if (metaLight) metaLight.setAttribute('content', themeColor);
+            if (metaDark) metaDark.setAttribute('content', themeColor);
+
+            // Ajusta o estilo do status bar no Safari (iOS / iPhone)
+            const appleStatusBar = document.getElementById('appleStatusBarMeta');
+            if (appleStatusBar) {
+                appleStatusBar.setAttribute('content', isDark ? 'black-translucent' : 'default');
             }
         }
 
