@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>Guardiões Virtuais - Material Design</title>
     <!-- Tipografia PT Serif e Ícones Oficiais do Google -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -48,9 +48,10 @@
             --md-sys-color-outline-variant: #D7C3B5;
             
             /* Hairline Border & Enhanced Glow Tokens */
-            --md-sys-color-hairline: rgba(133, 116, 104, 0.14);
-            --md-sys-color-glow: rgba(120, 83, 53, 0.08);
-            --md-sys-color-glow-intense: rgba(120, 83, 53, 0.16);
+            --md-sys-color-hairline: rgba(133, 116, 104, 0.16);
+            --md-sys-color-glow: rgba(120, 83, 53, 0.16);
+            --md-sys-color-glow-intense: rgba(120, 83, 53, 0.32);
+            --md-sys-color-globe-core: rgba(255, 220, 195, 0.75);
             
             /* Status Indicators */
             --md-sys-color-good: #386A20;
@@ -96,9 +97,10 @@
             --md-sys-color-outline-variant: #52443C;
             
             /* Hairline Border & Ambient Glow no modo escuro */
-            --md-sys-color-hairline: rgba(236, 224, 216, 0.12);
-            --md-sys-color-glow: rgba(233, 185, 152, 0.10);
-            --md-sys-color-glow-intense: rgba(233, 185, 152, 0.22);
+            --md-sys-color-hairline: rgba(236, 224, 216, 0.14);
+            --md-sys-color-glow: rgba(233, 185, 152, 0.18);
+            --md-sys-color-glow-intense: rgba(233, 185, 152, 0.36);
+            --md-sys-color-globe-core: rgba(233, 185, 152, 0.28);
 
             --md-sys-color-good: #9CD67D;
             --md-sys-color-good-container: #21510B;
@@ -118,16 +120,24 @@
             padding: 0;
             font-family: 'PT Serif', serif;
             -webkit-tap-highlight-color: transparent;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            user-select: none;
+            touch-action: none;
         }
 
         html, body {
             height: 100%;
             height: 100dvh;
             max-height: 100dvh;
-            width: 100vw;
-            overflow: hidden;
+            width: 100%;
+            max-width: 100vw;
+            overflow: hidden !important;
+            overscroll-behavior: none !important;
             position: fixed;
+            inset: 0;
             font-size: 16px;
+            touch-action: none !important;
         }
 
         body {
@@ -244,20 +254,14 @@
 
         .character-grid {
             display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            grid-template-rows: repeat(2, 1fr);
+            grid-template-columns: repeat(var(--grid-cols, 4), minmax(0, 1fr));
+            grid-template-rows: repeat(var(--grid-rows, 2), minmax(0, 1fr));
             gap: clamp(8px, 1.4vh, 12px);
             flex: 1;
             min-height: 0;
             width: 100%;
             padding: 2px;
-        }
-
-        @media (max-width: 480px) {
-            .character-grid {
-                grid-template-columns: repeat(2, 1fr);
-                grid-template-rows: repeat(5, 1fr);
-            }
+            overflow: hidden;
         }
 
         .char-card {
@@ -267,8 +271,8 @@
             padding: clamp(6px, 1vh, 10px) 6px;
             text-align: center;
             cursor: pointer;
-            box-shadow: var(--md-elevation-1);
-            transition: all 0.2s cubic-bezier(0.2, 0.0, 0.0, 1.0);
+            box-shadow: var(--md-elevation-1), 0 0 12px 0px var(--md-sys-color-glow);
+            transition: all 0.22s cubic-bezier(0.2, 0.0, 0.0, 1.0);
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -278,27 +282,41 @@
             min-height: 0;
             overflow: hidden;
             position: relative;
+            gap: 4px;
         }
 
         .char-card:hover {
             transform: translateY(-2px);
-            box-shadow: var(--md-elevation-2);
+            box-shadow: var(--md-elevation-2), 0 0 20px 3px var(--md-sys-color-glow-intense);
             border-color: var(--md-sys-color-primary);
             background-color: var(--md-sys-color-secondary-container);
         }
 
         .char-card img {
-            max-height: 62%;
-            max-width: 85%;
+            max-height: 68%;
+            max-width: 88%;
+            aspect-ratio: 1 / 1;
             object-fit: contain;
             border-radius: var(--md-shape-corner-small);
-            margin-bottom: 4px;
+            margin-bottom: 2px;
             image-rendering: pixelated;
-            filter: drop-shadow(0 3px 5px rgba(0, 0, 0, 0.12));
+            box-shadow: 0 0 14px 2px var(--md-sys-color-glow-intense);
+            filter: drop-shadow(0 0 8px var(--md-sys-color-glow-intense)) drop-shadow(0 3px 5px rgba(0, 0, 0, 0.15));
+            -webkit-user-drag: none;
+            pointer-events: none;
+            transition: transform 0.22s ease, box-shadow 0.22s ease, filter 0.22s ease;
+        }
+
+        .char-card:hover img {
+            transform: scale(1.04);
+            box-shadow: 0 0 20px 4px var(--md-sys-color-glow-intense);
+            filter: drop-shadow(0 0 12px var(--md-sys-color-glow-intense)) drop-shadow(0 4px 7px rgba(0, 0, 0, 0.18));
         }
 
         .char-card .label-large {
-            font-size: clamp(0.82rem, 1.8vh, 0.95rem);
+            position: relative;
+            z-index: 1;
+            font-size: clamp(0.78rem, 1.75vh, 0.94rem);
             font-weight: 700;
             color: var(--md-sys-color-on-surface);
             line-height: 1.15;
@@ -307,6 +325,7 @@
             text-overflow: ellipsis;
             max-width: 100%;
             padding: 0 4px;
+            flex-shrink: 0;
         }
 
         .game-top-bar {
@@ -365,34 +384,46 @@
         }
 
         .pet-avatar-wrapper {
-            height: clamp(85px, 22vh, 150px);
-            width: clamp(85px, 22vh, 150px);
+            position: relative;
+            height: clamp(88px, 22vh, 152px);
+            width: clamp(88px, 22vh, 152px);
             border-radius: var(--md-shape-corner-large);
             background-color: var(--md-sys-color-surface);
             display: flex;
             justify-content: center;
             align-items: center;
-            border: 0.5px solid var(--md-sys-color-hairline);
-            margin-bottom: 6px;
-            box-shadow: var(--md-elevation-2);
+            border: 1px solid var(--md-sys-color-hairline);
+            margin-bottom: 8px;
+            box-shadow:
+                var(--md-elevation-2),
+                0 0 26px 5px var(--md-sys-color-glow-intense),
+                inset 0 0 16px 1px var(--md-sys-color-glow);
             padding: 8px;
-            transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+            transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s ease;
             overflow: hidden;
         }
 
         .pet-avatar-wrapper img {
+            position: relative;
+            z-index: 1;
             width: 100%;
             height: 100%;
+            aspect-ratio: 1 / 1;
             object-fit: contain;
             border-radius: var(--md-shape-corner-medium);
             image-rendering: pixelated;
-            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.16));
+            filter: drop-shadow(0 0 12px var(--md-sys-color-glow-intense)) drop-shadow(0 4px 8px rgba(0, 0, 0, 0.16));
+            -webkit-user-drag: none;
+            pointer-events: none;
         }
 
         .pet-avatar-wrapper.anim-pulse {
             transform: scale(1.08);
             border-color: var(--md-sys-color-primary);
-            box-shadow: var(--md-elevation-3);
+            box-shadow:
+                var(--md-elevation-3),
+                0 0 34px 9px var(--md-sys-color-glow-intense),
+                inset 0 0 20px 3px var(--md-sys-color-glow-intense);
         }
 
         .pet-title {
@@ -622,18 +653,98 @@
     </main>
 
     <script>
-        const characters = [
-            { id: 'leao', name: 'Rei Leão', src: 'x03-leao.png' },
-            { id: 'tigre', name: 'Tigre Samurai', src: 'z03-tigre.png' },
-            { id: 'raposa', name: 'Raposa Astuta', src: 'x04-raposa.png' },
-            { id: 'dragao', name: 'Dragão Místico', src: 'z05-dragao.png' },
-            { id: 'coelho', name: 'Princesa Coelha', src: 'z04-coelho.png' },
-            { id: 'cabra', name: 'Cabra Bardo', src: 'z08-cabra.png' },
-            { id: 'galo', name: 'Galo Espadachim', src: 'z10-galo.png' },
-            { id: 'humana', name: 'Camponesa', src: 'h16-latina-f-young.png' },
-            { id: 'monarca', name: 'Soberano Estelar', src: 'h20-nonbinary-mixed.png' },
-            { id: 'macaco', name: 'Macaco Bobo', src: 'z09-macaco.png' }
+        const DEFAULT_AVATAR_FILES = [
+            'x01-lobo.png',
+            'x02-coruja.png',
+            'x03-leao.png',
+            'x04-raposa.png',
+            'z03-tigre.png',
+            'z04-coelho.png',
+            'z05-dragao.png',
+            'z08-cabra.png'
         ];
+
+        const KNOWN_NAMES = {
+            'x01-lobo': 'Lobo Guardião',
+            'lobo': 'Lobo Guardião',
+            'x02-coruja': 'Coruja Sábia',
+            'coruja': 'Coruja Sábia',
+            'x03-leao': 'Rei Leão',
+            'leao': 'Rei Leão',
+            'x04-raposa': 'Raposa Astuta',
+            'raposa': 'Raposa Astuta',
+            'z03-tigre': 'Tigre Samurai',
+            'tigre': 'Tigre Samurai',
+            'z04-coelho': 'Princesa Coelha',
+            'coelho': 'Princesa Coelha',
+            'z05-dragao': 'Dragão Místico',
+            'dragao': 'Dragão Místico',
+            'z08-cabra': 'Cabra Bardo',
+            'cabra': 'Cabra Bardo',
+            'z09-macaco': 'Macaco Bobo',
+            'macaco': 'Macaco Bobo',
+            'z10-galo': 'Galo Espadachim',
+            'galo': 'Galo Espadachim',
+            'h16-latina-f-young': 'Camponesa',
+            'humana': 'Camponesa',
+            'h20-nonbinary-mixed': 'Soberano Estelar',
+            'monarca': 'Soberano Estelar'
+        };
+
+        const IMAGE_EXT_REGEX = /\.(png|jpe?g|webp|gif|svg|avif)$/i;
+        const AVATAR_CACHE_KEY = 'guardioes_avatar_files_v1';
+
+        function formatDisplayName(baseName) {
+            const lowerBase = baseName.toLowerCase();
+            if (KNOWN_NAMES[lowerBase]) return KNOWN_NAMES[lowerBase];
+
+            const stripped = baseName.replace(/^[a-zA-Z]?\d+[-_]+/, '');
+            const lowerStripped = stripped.toLowerCase();
+            if (KNOWN_NAMES[lowerStripped]) return KNOWN_NAMES[lowerStripped];
+
+            return stripped
+                .split(/[-_\s]+/)
+                .filter(Boolean)
+                .map((word, idx) => {
+                    const lower = word.toLowerCase();
+                    if (idx > 0 && ['de', 'da', 'do', 'das', 'dos', 'e'].includes(lower)) {
+                        return lower;
+                    }
+                    return lower.charAt(0).toUpperCase() + lower.slice(1);
+                })
+                .join(' ') || 'Guardião';
+        }
+
+        function buildCharacterFromFile(filePathOrName) {
+            const cleanName = filePathOrName.split('/').pop().trim();
+            const baseName = cleanName.replace(/\.[^/.]+$/, '');
+            const shortKey = baseName.replace(/^[a-zA-Z]?\d+[-_]+/, '').toLowerCase();
+            const encodedFile = encodeURIComponent(cleanName);
+
+            return {
+                id: baseName.toLowerCase(),
+                legacyId: shortKey,
+                fileName: cleanName,
+                name: formatDisplayName(baseName),
+                src: `./avatar/${encodedFile}`,
+                fallbackSrc: `./${encodedFile}`
+            };
+        }
+
+        function getInitialAvatarFiles() {
+            try {
+                const cached = localStorage.getItem(AVATAR_CACHE_KEY);
+                if (cached) {
+                    const parsed = JSON.parse(cached);
+                    if (Array.isArray(parsed) && parsed.length > 0) {
+                        return parsed;
+                    }
+                }
+            } catch (e) {}
+            return DEFAULT_AVATAR_FILES;
+        }
+
+        let characters = getInitialAvatarFiles().map(buildCharacterFromFile);
 
         let gameState = {
             activePetId: null,
@@ -661,6 +772,179 @@
             joy: { fill: document.getElementById('barJoy'), val: document.getElementById('valJoy') },
             energy: { fill: document.getElementById('barEnergy'), val: document.getElementById('valEnergy') }
         };
+
+        // Bloqueio total de pinch-to-zoom, duplo toque para zoom, zoom por teclado/wheel e rolagem
+        function initViewportLock() {
+            let lastTouchEnd = 0;
+
+            document.addEventListener('touchstart', (e) => {
+                if (e.touches && e.touches.length > 1) {
+                    e.preventDefault();
+                }
+            }, { passive: false });
+
+            document.addEventListener('touchmove', (e) => {
+                e.preventDefault();
+            }, { passive: false });
+
+            document.addEventListener('touchend', (e) => {
+                const now = Date.now();
+                if (now - lastTouchEnd <= 300) {
+                    e.preventDefault();
+                }
+                lastTouchEnd = now;
+            }, { passive: false });
+
+            ['gesturestart', 'gesturechange', 'gestureend', 'dblclick', 'contextmenu'].forEach((evtName) => {
+                document.addEventListener(evtName, (e) => {
+                    e.preventDefault();
+                }, { passive: false });
+            });
+
+            window.addEventListener('wheel', (e) => {
+                e.preventDefault();
+            }, { passive: false });
+
+            window.addEventListener('keydown', (e) => {
+                if ((e.ctrlKey || e.metaKey) && ['+', '-', '=', '0', '_'].includes(e.key)) {
+                    e.preventDefault();
+                }
+                if (['ArrowUp', 'ArrowDown', 'PageUp', 'PageDown', ' '].includes(e.key) && e.target === document.body) {
+                    e.preventDefault();
+                }
+            }, { passive: false });
+
+            window.addEventListener('scroll', () => {
+                if (window.scrollX !== 0 || window.scrollY !== 0) {
+                    window.scrollTo(0, 0);
+                }
+            }, { passive: true });
+
+            window.addEventListener('resize', () => {
+                window.scrollTo(0, 0);
+                updateGridDimensions();
+            });
+        }
+
+        function updateGridDimensions() {
+            if (!charGrid) return;
+            const count = Math.max(1, characters.length);
+            const isPortraitMobile = window.innerWidth <= 480;
+
+            let cols;
+            let rows;
+            if (isPortraitMobile) {
+                cols = count > 10 ? 3 : 2;
+                rows = Math.ceil(count / cols);
+            } else {
+                if (count <= 8) {
+                    cols = 4;
+                } else if (count <= 10) {
+                    cols = 5;
+                } else {
+                    cols = Math.ceil(Math.sqrt(count * 1.6));
+                }
+                rows = Math.max(2, Math.ceil(count / cols));
+            }
+
+            charGrid.style.setProperty('--grid-cols', String(cols));
+            charGrid.style.setProperty('--grid-rows', String(rows));
+        }
+
+        function findCharacterById(id) {
+            if (!id) return null;
+            const target = String(id).toLowerCase();
+            return characters.find(
+                (c) => c.id === target || c.legacyId === target || c.fileName.toLowerCase() === target
+            ) || null;
+        }
+
+        function attachAvatarFallback(imgElement, charObj, cardElement) {
+            let triedFallback = false;
+            imgElement.onerror = () => {
+                if (!triedFallback && charObj.fallbackSrc && imgElement.src !== charObj.fallbackSrc) {
+                    triedFallback = true;
+                    imgElement.src = charObj.fallbackSrc;
+                } else if (cardElement) {
+                    cardElement.style.display = 'none';
+                }
+            };
+        }
+
+        function detectGitHubRepo() {
+            const host = window.location.hostname;
+            const pathParts = window.location.pathname.split('/').filter(Boolean);
+            if (host.endsWith('.github.io')) {
+                const owner = host.replace('.github.io', '');
+                const repo = pathParts[0] || 'buddy';
+                return { owner, repo };
+            }
+            return { owner: 'romastefale', repo: 'buddy' };
+        }
+
+        async function discoverAvatarFiles() {
+            const isGitHubPages = window.location.hostname.endsWith('.github.io');
+
+            // 1. Tenta endpoint local da pasta /avatar (ambiente Node / servidor local)
+            if (!isGitHubPages) {
+                try {
+                    const res = await fetch('./api/avatars', { cache: 'no-store' });
+                    if (res.ok) {
+                        const data = await res.json();
+                        if (data && Array.isArray(data.files) && data.files.length > 0) {
+                            return data.files.filter((f) => IMAGE_EXT_REGEX.test(f));
+                        }
+                    }
+                } catch (e) {}
+            }
+
+            // 2. Tenta ler a pasta /avatar diretamente via API pública do GitHub (compatível com GitHub Pages)
+            try {
+                const { owner, repo } = detectGitHubRepo();
+                const ghRes = await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/avatar`, {
+                    headers: { 'Accept': 'application/vnd.github.v3+json' }
+                });
+                if (ghRes.ok) {
+                    const items = await ghRes.json();
+                    if (Array.isArray(items)) {
+                        const files = items
+                            .filter((item) => item && item.type === 'file' && IMAGE_EXT_REGEX.test(item.name))
+                            .map((item) => item.name)
+                            .sort((a, b) => a.localeCompare(b, undefined, { numeric: true, sensitivity: 'base' }));
+                        if (files.length > 0) {
+                            return files;
+                        }
+                    }
+                }
+            } catch (e) {}
+
+            return null;
+        }
+
+        async function syncAvatarsFromFolder() {
+            const discovered = await discoverAvatarFiles();
+            if (!discovered || discovered.length === 0) return;
+
+            const currentListKey = characters.map((c) => c.fileName).join('|');
+            const newListKey = discovered.join('|');
+
+            if (currentListKey !== newListKey) {
+                characters = discovered.map(buildCharacterFromFile);
+                try {
+                    localStorage.setItem(AVATAR_CACHE_KEY, JSON.stringify(discovered));
+                } catch (e) {}
+
+                if (screenSelection.classList.contains('active')) {
+                    renderSelection();
+                } else {
+                    const activePet = findCharacterById(gameState.activePetId) || characters[0];
+                    if (activePet) {
+                        petImage.src = activePet.src;
+                        petName.innerText = activePet.name;
+                    }
+                }
+            }
+        }
 
         function initTheme() {
             const savedTheme = localStorage.getItem('theme') || 'light';
@@ -706,8 +990,9 @@
         }
 
         function renderSelection() {
+            updateGridDimensions();
             charGrid.innerHTML = '';
-            characters.forEach(char => {
+            characters.forEach((char) => {
                 const card = document.createElement('div');
                 card.className = 'char-card';
                 card.onclick = () => selectPet(char.id);
@@ -715,6 +1000,8 @@
                 const img = document.createElement('img');
                 img.src = char.src;
                 img.alt = char.name;
+                img.draggable = false;
+                attachAvatarFallback(img, char, card);
                 
                 const name = document.createElement('span');
                 name.className = 'label-large';
@@ -778,9 +1065,12 @@
             screenSelection.classList.remove('active');
             screenGame.classList.add('active');
             
-            const pet = characters.find(c => c.id === gameState.activePetId);
+            const pet = findCharacterById(gameState.activePetId) || characters[0];
             if (pet) {
+                gameState.activePetId = pet.id;
                 petImage.src = pet.src;
+                petImage.draggable = false;
+                attachAvatarFallback(petImage, pet, null);
                 petName.innerText = pet.name;
             }
 
@@ -878,8 +1168,10 @@
         });
 
         // Inicialização
+        initViewportLock();
         initTheme();
         loadGame();
+        syncAvatarsFromFolder();
     </script>
 </body>
 </html>

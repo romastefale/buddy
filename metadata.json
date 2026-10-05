@@ -1,0 +1,8 @@
+{
+  "name": "Guardiões Virtuais",
+  "description": "Seu guardião virtual para acompanhar seu dia a dia em Material Design 3.",
+  "permissions": [],
+  "capabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
