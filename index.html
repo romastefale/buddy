@@ -15,14 +15,17 @@
     <meta name="theme-color" id="themeColorMetaLight" media="(prefers-color-scheme: light)" content="#FBF8F5">
     <meta name="theme-color" id="themeColorMetaDark" media="(prefers-color-scheme: dark)" content="#18120E">
     
-    <!-- Compatibilidade Safari / iOS iPhone -->
+    <!-- Compatibilidade PWA / Safari iOS / Chrome Android com escopo isolado por subdiretório -->
+    <meta name="application-name" content="Guardiões Virtuais">
+    <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" id="appleStatusBarMeta" content="default">
     <meta name="apple-mobile-web-app-title" content="Guardiões">
-    <link rel="apple-touch-icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512' fill='%23785335'><rect width='512' height='512' rx='128' fill='%23785335'/><path d='M256 140c-35 0-65 25-65 60 0 25 15 45 35 55-5 15-20 25-40 25-30 0-50 20-50 50 0 45 50 82 120 82s120-37 120-82c0-30-20-50-50-50-20 0-35-10-40-25 20-10 35-30 35-55 0-35-30-60-65-60z' fill='%23FFDCC3'/><circle cx='170' cy='150' r='26' fill='%23FFDCC3'/><circle cx='342' cy='150' r='26' fill='%23FFDCC3'/><circle cx='110' cy='220' r='22' fill='%23FFDCC3'/><circle cx='402' cy='220' r='22' fill='%23FFDCC3'/></svg>">
+    <link rel="apple-touch-icon" href="./avatar/x03-leao.png">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512' fill='%23785335'><rect width='512' height='512' rx='128' fill='%23785335'/><path d='M256 140c-35 0-65 25-65 60 0 25 15 45 35 55-5 15-20 25-40 25-30 0-50 20-50 50 0 45 50 82 120 82s120-37 120-82c0-30-20-50-50-50-20 0-35-10-40-25 20-10 35-30 35-55 0-35-30-60-65-60z' fill='%23FFDCC3'/><circle cx='170' cy='150' r='26' fill='%23FFDCC3'/><circle cx='342' cy='150' r='26' fill='%23FFDCC3'/><circle cx='110' cy='220' r='22' fill='%23FFDCC3'/><circle cx='402' cy='220' r='22' fill='%23FFDCC3'/></svg>">
 
-    <!-- Web App Manifest embutido (PWA) com identificador único do domínio -->
-    <link rel="manifest" href="data:application/manifest+json;charset=utf-8,%7B%22id%22%3A%22https%3A%2F%2Fromastefale.github.io%2Fbuddy%2F%22%2C%22name%22%3A%22Guardi%C3%B5es%20Virtuais%22%2C%22short_name%22%3A%22Guardi%C3%B5es%22%2C%22start_url%22%3A%22https%3A%2F%2Fromastefale.github.io%2Fbuddy%2F%22%2C%22scope%22%3A%22https%3A%2F%2Fromastefale.github.io%2Fbuddy%2F%22%2C%22display%22%3A%22standalone%22%2C%22orientation%22%3A%22portrait%22%2C%22background_color%22%3A%22%23FBF8F5%22%2C%22theme_color%22%3A%22%23FBF8F5%22%2C%22description%22%3A%22Seu%20guardi%C3%A3o%20virtual%20para%20acompanhar%20seu%20dia%20a%20dia.%22%2C%22icons%22%3A%5B%7B%22src%22%3A%22data%3Aimage%2Fsvg%2Bxml%3Butf8%2C%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%20512%20512'%20fill%3D'%23785335'%3E%3Crect%20width%3D'512'%20height%3D'512'%20rx%3D'128'%20fill%3D'%23785335'%2F%3E%3Cpath%20d%3D'M256%20140c-35%200-65%2025-65%2060%200%2025%2015%2045%2035%2055-5%2015-20%2025-40%2025-30%200-50%2020-50%2050%200%2045%2050%2082%20120%2082s120-37%20120-82c0-30-20-50-50-50-20%200-35-10-40-25%2020-10%2035-30%2035-55%200-35-30-60-65-60z'%20fill%3D'%23FFDCC3'%2F%3E%3Ccircle%20cx%3D'170'%20cy%3D'150'%20r%3D'26'%20fill%3D'%23FFDCC3'%2F%3E%3Ccircle%20cx%3D'342'%20cy%3D'150'%20r%3D'26'%20fill%3D'%23FFDCC3'%2F%3E%3Ccircle%20cx%3D'110'%20cy%3D'220'%20r%3D'22'%20fill%3D'%23FFDCC3'%2F%3E%3Ccircle%20cx%3D'402'%20cy%3D'220'%20r%3D'22'%20fill%3D'%23FFDCC3'%2F%3E%3C%2Fsvg%3E%22%2C%22sizes%22%3A%22512x512%22%2C%22type%22%3A%22image%2Fsvg%2Bxml%22%2C%22purpose%22%3A%22any%20maskable%22%7D%5D%7D">
+    <!-- Web App Manifest externo com id, start_url e scope relativos à subpasta (/buddy/) para evitar conflito com outros apps do mesmo domínio -->
+    <link rel="manifest" href="./manifest.webmanifest">
 
     <style>
         :root {
@@ -993,8 +996,10 @@
             }
         }
 
+        const THEME_STORAGE_KEY = 'guardioes_buddy_theme';
+
         function initTheme() {
-            const savedTheme = localStorage.getItem('theme') || 'light';
+            const savedTheme = localStorage.getItem(THEME_STORAGE_KEY) || localStorage.getItem('theme') || 'light';
             document.body.dataset.theme = savedTheme;
             updateThemeIcon();
             updateThemeMeta();
@@ -1003,7 +1008,7 @@
         themeBtn.addEventListener('click', () => {
             const isDark = document.body.dataset.theme === 'dark';
             document.body.dataset.theme = isDark ? 'light' : 'dark';
-            localStorage.setItem('theme', document.body.dataset.theme);
+            localStorage.setItem(THEME_STORAGE_KEY, document.body.dataset.theme);
             updateThemeIcon();
             updateThemeMeta();
         });
@@ -1214,11 +1219,20 @@
             screenSelection.classList.add('active');
         });
 
+        function registerScopedServiceWorker() {
+            if ('serviceWorker' in navigator && window.location.protocol.startsWith('http')) {
+                window.addEventListener('load', () => {
+                    navigator.serviceWorker.register('./sw.js', { scope: './' }).catch(() => {});
+                });
+            }
+        }
+
         // Inicialização
         initViewportLock();
         initTheme();
         loadGame();
         syncAvatarsFromFolder();
+        registerScopedServiceWorker();
     </script>
 </body>
 </html>
