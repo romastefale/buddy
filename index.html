@@ -50,11 +50,11 @@
             --md-sys-color-outline: #857468;
             --md-sys-color-outline-variant: #D7C3B5;
             
-            /* Hairline Border & Enhanced Glow Tokens */
-            --md-sys-color-hairline: rgba(133, 116, 104, 0.18);
-            --md-sys-color-glow: rgba(120, 83, 53, 0.15);
-            --md-sys-color-glow-intense: rgba(120, 83, 53, 0.30);
-            --md-sys-color-card-highlight: rgba(255, 255, 255, 0.65);
+            /* Hairline Border & Enhanced Glow Tokens (Padrão Uniforme do Baseline) */
+            --md-sys-color-hairline: rgba(133, 116, 104, 0.14);
+            --md-hairline-border: 0.5px solid var(--md-sys-color-hairline);
+            --md-sys-color-glow: rgba(120, 83, 53, 0.14);
+            --md-sys-color-glow-intense: rgba(120, 83, 53, 0.26);
             
             /* Status Indicators */
             --md-sys-color-good: #386A20;
@@ -65,12 +65,12 @@
             --md-sys-color-error-container: #FFDAD6;
 
             /* Elevation Tokens M3 + Brilho Ambiente */
-            --md-elevation-1: 0px 3px 10px -1px rgba(60, 40, 20, 0.10), 0px 1px 4px rgba(0, 0, 0, 0.05);
-            --md-elevation-2: 0px 8px 20px -2px rgba(120, 83, 53, 0.15), 0px 3px 8px rgba(0, 0, 0, 0.07);
-            --md-elevation-3: 0px 14px 30px -4px rgba(120, 83, 53, 0.22), 0px 5px 14px rgba(0, 0, 0, 0.09);
+            --md-elevation-1: 0px 2px 8px -1px rgba(60, 40, 20, 0.08), 0px 1px 3px rgba(0, 0, 0, 0.04);
+            --md-elevation-2: 0px 6px 18px -2px rgba(120, 83, 53, 0.12), 0px 2px 6px rgba(0, 0, 0, 0.06);
+            --md-elevation-3: 0px 12px 28px -4px rgba(120, 83, 53, 0.18), 0px 4px 12px rgba(0, 0, 0, 0.08);
             
-            --md-card-shadow: var(--md-elevation-1), 0px 0px 16px 1px var(--md-sys-color-glow);
-            --md-card-shadow-hover: var(--md-elevation-2), 0px 0px 24px 4px var(--md-sys-color-glow-intense);
+            --md-card-shadow: var(--md-elevation-1), 0px 0px 14px 0px var(--md-sys-color-glow);
+            --md-card-shadow-hover: var(--md-elevation-2), 0px 0px 20px 2px var(--md-sys-color-glow-intense);
             
             --md-shape-corner-small: 10px;
             --md-shape-corner-medium: 18px;
@@ -102,11 +102,11 @@
             --md-sys-color-outline: #A08D81;
             --md-sys-color-outline-variant: #52443C;
             
-            /* Hairline Border & Ambient Glow no modo escuro */
-            --md-sys-color-hairline: rgba(236, 224, 216, 0.15);
-            --md-sys-color-glow: rgba(233, 185, 152, 0.16);
-            --md-sys-color-glow-intense: rgba(233, 185, 152, 0.34);
-            --md-sys-color-card-highlight: rgba(255, 220, 195, 0.07);
+            /* Hairline Border & Ambient Glow no modo escuro (Padrão Uniforme do Baseline) */
+            --md-sys-color-hairline: rgba(236, 224, 216, 0.12);
+            --md-hairline-border: 0.5px solid var(--md-sys-color-hairline);
+            --md-sys-color-glow: rgba(233, 185, 152, 0.14);
+            --md-sys-color-glow-intense: rgba(233, 185, 152, 0.28);
 
             --md-sys-color-good: #9CD67D;
             --md-sys-color-good-container: #21510B;
@@ -115,12 +115,12 @@
             --md-sys-color-error: #FFB4AB;
             --md-sys-color-error-container: #93000A;
 
-            --md-elevation-1: 0px 4px 14px 0px rgba(0, 0, 0, 0.45);
-            --md-elevation-2: 0px 8px 24px 0px rgba(0, 0, 0, 0.60), 0px 0px 16px 1px rgba(233, 185, 152, 0.12);
-            --md-elevation-3: 0px 14px 34px 0px rgba(0, 0, 0, 0.72), 0px 0px 22px 2px rgba(233, 185, 152, 0.18);
+            --md-elevation-1: 0px 3px 12px 0px rgba(0, 0, 0, 0.40);
+            --md-elevation-2: 0px 8px 22px 0px rgba(0, 0, 0, 0.55), 0px 0px 14px 1px rgba(233, 185, 152, 0.10);
+            --md-elevation-3: 0px 14px 32px 0px rgba(0, 0, 0, 0.70), 0px 0px 20px 2px rgba(233, 185, 152, 0.15);
 
-            --md-card-shadow: var(--md-elevation-1), 0px 0px 16px 1px var(--md-sys-color-glow);
-            --md-card-shadow-hover: var(--md-elevation-2), 0px 0px 24px 4px var(--md-sys-color-glow-intense);
+            --md-card-shadow: var(--md-elevation-1), 0px 0px 14px 0px var(--md-sys-color-glow);
+            --md-card-shadow-hover: var(--md-elevation-2), 0px 0px 20px 2px var(--md-sys-color-glow-intense);
         }
 
         * {
@@ -133,6 +133,13 @@
             -webkit-user-select: none;
             user-select: none;
             touch-action: none;
+        }
+
+        button {
+            appearance: none;
+            -webkit-appearance: none;
+            outline: none;
+            font-family: inherit;
         }
 
         html, body {
@@ -165,6 +172,7 @@
             font-variation-settings: 'FILL' 0, 'wght' 500, 'GRAD' 0, 'opsz' 24;
             vertical-align: middle;
             user-select: none;
+            line-height: 1;
         }
 
         header {
@@ -192,7 +200,7 @@
 
         .icon-btn {
             background: var(--md-sys-color-surface);
-            border: 1px solid var(--md-sys-color-hairline);
+            border: 0.5px solid var(--md-sys-color-hairline);
             color: var(--md-sys-color-on-surface-variant);
             width: clamp(42px, 5.6vh, 48px);
             height: clamp(42px, 5.6vh, 48px);
@@ -208,7 +216,7 @@
         .icon-btn:hover {
             background-color: var(--md-sys-color-secondary-container);
             color: var(--md-sys-color-primary);
-            border-color: var(--md-sys-color-primary);
+            border-color: var(--md-sys-color-hairline);
             box-shadow: var(--md-card-shadow-hover);
             transform: translateY(-1px);
         }
@@ -224,7 +232,7 @@
             border-radius: var(--md-shape-corner-large);
             padding: clamp(14px, 2.4vh, 24px) clamp(14px, 2.6vw, 24px);
             box-shadow: var(--md-elevation-3), 0 0 32px 2px var(--md-sys-color-glow);
-            border: 1px solid var(--md-sys-color-hairline);
+            border: 0.5px solid var(--md-sys-color-hairline);
             overflow: hidden;
             justify-content: space-between;
         }
@@ -284,12 +292,12 @@
 
         .char-card {
             background-color: var(--md-sys-color-surface);
-            border: 1px solid var(--md-sys-color-hairline);
+            border: 0.5px solid var(--md-sys-color-hairline);
             border-radius: var(--md-shape-corner-medium);
             padding: clamp(10px, 1.6vh, 16px) clamp(8px, 1.4vw, 14px);
             text-align: center;
             cursor: pointer;
-            box-shadow: var(--md-card-shadow), inset 0 1px 0 var(--md-sys-color-card-highlight);
+            box-shadow: var(--md-card-shadow);
             transition: all 0.22s cubic-bezier(0.2, 0.0, 0.0, 1.0);
             display: flex;
             flex-direction: column;
@@ -304,8 +312,8 @@
 
         .char-card:hover {
             transform: translateY(-2px);
-            box-shadow: var(--md-card-shadow-hover), inset 0 1px 0 var(--md-sys-color-card-highlight);
-            border-color: var(--md-sys-color-primary);
+            box-shadow: var(--md-card-shadow-hover);
+            border-color: var(--md-sys-color-hairline);
             background-color: var(--md-sys-color-secondary-container);
         }
 
@@ -367,13 +375,15 @@
 
         .btn-text-icon {
             background: var(--md-sys-color-surface);
-            border: 1px solid var(--md-sys-color-hairline);
+            border: 0.5px solid var(--md-sys-color-hairline);
             color: var(--md-sys-color-primary);
             font-weight: 700;
             font-size: clamp(0.88rem, 1.9vh, 1rem);
+            line-height: 1.2;
             letter-spacing: 0.01em;
             display: inline-flex;
             align-items: center;
+            justify-content: center;
             gap: 6px;
             cursor: pointer;
             padding: 6px 16px;
@@ -385,7 +395,7 @@
         .btn-text-icon:hover {
             background-color: var(--md-sys-color-primary-container);
             color: var(--md-sys-color-on-primary-container);
-            border-color: var(--md-sys-color-primary);
+            border-color: var(--md-sys-color-hairline);
             box-shadow: var(--md-card-shadow-hover);
             transform: translateY(-1px);
         }
@@ -393,12 +403,14 @@
         .chip-assist {
             display: inline-flex;
             align-items: center;
+            justify-content: center;
             gap: 6px;
             background-color: var(--md-sys-color-surface);
-            border: 1px solid var(--md-sys-color-hairline);
+            border: 0.5px solid var(--md-sys-color-hairline);
             padding: 6px 16px;
             border-radius: var(--md-shape-corner-small);
             font-size: clamp(0.84rem, 1.8vh, 0.96rem);
+            line-height: 1.2;
             font-weight: 700;
             letter-spacing: 0.01em;
             font-variant-numeric: tabular-nums;
@@ -426,7 +438,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            border: 1px solid var(--md-sys-color-hairline);
+            border: 0.5px solid var(--md-sys-color-hairline);
             box-shadow:
                 var(--md-elevation-2),
                 0 0 28px 6px var(--md-sys-color-glow-intense),
@@ -454,7 +466,7 @@
 
         .pet-avatar-wrapper.anim-pulse {
             transform: scale(1.08);
-            border-color: var(--md-sys-color-primary);
+            border-color: var(--md-sys-color-hairline);
             box-shadow:
                 var(--md-elevation-3),
                 0 0 36px 10px var(--md-sys-color-glow-intense),
@@ -481,19 +493,19 @@
         /* Cada estatística envolvida em um card com elevação e brilho suave */
         .stat-card {
             background-color: var(--md-sys-color-surface);
-            border: 1px solid var(--md-sys-color-hairline);
+            border: 0.5px solid var(--md-sys-color-hairline);
             border-radius: var(--md-shape-corner-medium);
             padding: clamp(9px, 1.4vh, 13px) clamp(12px, 2.2vw, 18px);
-            box-shadow: var(--md-card-shadow), inset 0 1px 0 var(--md-sys-color-card-highlight);
+            box-shadow: var(--md-card-shadow);
             display: flex;
             flex-direction: column;
             gap: 6px;
-            transition: box-shadow 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
+            transition: box-shadow 0.2s ease, transform 0.2s ease;
         }
 
         .stat-card:hover {
             box-shadow: var(--md-card-shadow-hover);
-            border-color: var(--md-sys-color-outline-variant);
+            border-color: var(--md-sys-color-hairline);
         }
 
         .stat-header {
@@ -543,7 +555,7 @@
         .btn-m3-action {
             background-color: var(--md-sys-color-secondary-container);
             color: var(--md-sys-color-on-secondary-container);
-            border: 1px solid var(--md-sys-color-hairline);
+            border: 0.5px solid var(--md-sys-color-hairline);
             padding: clamp(9px, 1.6vh, 14px) 8px;
             border-radius: var(--md-shape-corner-medium);
             font-weight: 700;
@@ -554,15 +566,16 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            justify-content: center;
             gap: 6px;
-            box-shadow: var(--md-card-shadow), inset 0 1px 0 var(--md-sys-color-card-highlight);
+            box-shadow: var(--md-card-shadow);
             transition: all 0.2s cubic-bezier(0.2, 0, 0, 1);
         }
 
         .btn-m3-action:hover {
             background-color: var(--md-sys-color-primary-container);
             color: var(--md-sys-color-on-primary-container);
-            border-color: var(--md-sys-color-primary);
+            border-color: var(--md-sys-color-hairline);
             transform: translateY(-2px);
             box-shadow: var(--md-card-shadow-hover);
         }
@@ -585,7 +598,7 @@
             align-items: center;
             gap: 10px;
             box-shadow: var(--md-card-shadow);
-            border: 1px solid var(--md-sys-color-hairline);
+            border: 0.5px solid var(--md-sys-color-hairline);
             flex-shrink: 0;
         }
     </style>
